@@ -30,11 +30,12 @@ public class Config
             .comment("Removes the players attack cooldown.").define("NoAttackCooldown", true);
     private static final ForgeConfigSpec.BooleanValue NoDamageDelay = BUILDER
             .comment("Removes the delay between hits.").define("NoDamageDelay",true);
-
+    private static final ForgeConfigSpec.BooleanValue RemoveCooldownIndicator = BUILDER
+            .comment("Removes the cooldown indikator wehen you punch").define("RemoveCooldownIndicator", true);
     static final ForgeConfigSpec SPEC = BUILDER.build();
     public static boolean NoAttackCooldownValue = true;
     public static boolean NoDamageDelayValue = true;
-    public static Set<Item> items;
+    public static boolean RemoveCooldownIndicatorValue = true;
     public static List<ResourceKey<DamageType>> damageTypesList = new ArrayList<>();
 
     @SubscribeEvent
@@ -42,6 +43,7 @@ public class Config
     {
         NoAttackCooldownValue=NoAttackCooldown.get();
         NoDamageDelayValue=NoDamageDelay.get();
+        RemoveCooldownIndicatorValue=RemoveCooldownIndicator.get();
         damageTypesList.add(DamageTypes.IN_FIRE);
         damageTypesList.add(DamageTypes.CACTUS);
         damageTypesList.add(DamageTypes.HOT_FLOOR);
