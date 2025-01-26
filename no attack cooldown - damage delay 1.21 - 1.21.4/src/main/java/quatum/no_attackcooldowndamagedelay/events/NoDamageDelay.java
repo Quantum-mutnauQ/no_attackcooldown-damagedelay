@@ -1,0 +1,28 @@
+package quatum.no_attackcooldowndamagedelay.events;
+
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import quatum.no_attackcooldowndamagedelay.Config;
+
+import java.util.concurrent.atomic.AtomicBoolean;
+
+@EventBusSubscriber
+public class NoDamageDelay
+{
+    @SubscribeEvent
+    public static void onLivingDamage(LivingDamageEvent.Post event) {
+        if (event != null && event.getEntity() != null && Config.NoDamageDelayValue) {
+            AtomicBoolean is = new AtomicBoolean(false);
+            Config.damageTypesListValue.forEach(damageTypeResourceKey -> {
+                if (event.getSource().is(damageTypeResourceKey))
+                    is.set(true);
+            });
+            if (!is.get() && !event.getEntity().level().isClientSide())
+                event.getEntity().invulnerableTime = 0;
+
+
+
+        }
+    }
+}
