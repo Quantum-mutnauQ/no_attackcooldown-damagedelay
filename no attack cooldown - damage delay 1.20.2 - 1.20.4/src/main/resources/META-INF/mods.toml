@@ -40,7 +40,7 @@ authors="${mod_authors}" #optional
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''${mod_description}'''
-updateJSONURL="https://raw.githubusercontent.com/Quantum-mutnauQ/no_attackcooldown-damagedelay/Asserts/updateJSON.json"
+updateJSONURL="https://raw.githubusercontent.com/Quantum-mutnauQ/no_attackcooldown-damagedelay/refs/heads/main/assets/updateJSON.json"
 displayTest="MATCH_VERSION"
 logoFile="logo.png"
 
