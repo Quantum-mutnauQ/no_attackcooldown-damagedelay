@@ -14,7 +14,7 @@ public class NoAttackCooldown_DamageDelay {
     // Define mod id in a common place for everything to reference
     public static final String MODID = "no_attack_cooldown_damage_delay";
     // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public NoAttackCooldown_DamageDelay(IEventBus modEventBus, ModContainer modContainer) {
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us

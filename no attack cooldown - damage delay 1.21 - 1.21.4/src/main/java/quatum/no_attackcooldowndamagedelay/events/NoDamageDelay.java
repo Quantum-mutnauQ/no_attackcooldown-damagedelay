@@ -4,25 +4,29 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import quatum.no_attackcooldowndamagedelay.Config;
+import quatum.no_attackcooldowndamagedelay.NoAttackCooldown_DamageDelay;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.Objects;
 
 @EventBusSubscriber
-public class NoDamageDelay
-{
+public class NoDamageDelay {
     @SubscribeEvent
     public static void onLivingDamage(LivingDamageEvent.Post event) {
-        if (event != null && event.getEntity() != null && Config.NoDamageDelayValue) {
-            AtomicBoolean is = new AtomicBoolean(false);
-            Config.damageTypesListValue.forEach(damageTypeResourceKey -> {
-                if (event.getSource().is(damageTypeResourceKey))
-                    is.set(true);
-            });
-            if (!is.get() && !event.getEntity().level().isClientSide())
+        if (event == null || event.getEntity() == null) {
+            return;
+        }
+
+        String damageTypeKey = Objects.requireNonNull(event.getSource().typeHolder().getKey()).toString();
+        String damageType = damageTypeKey.split("/ ")[1].split("]")[0];
+
+        if (Config.LogDamageValue) {
+            NoAttackCooldown_DamageDelay.LOGGER.info(damageTypeKey);
+        }
+
+        if (Config.NoDamageDelayValue && !event.getEntity().level().isClientSide()) {
+            if (!Config.damageTypesListValue.contains(damageType)) {
                 event.getEntity().invulnerableTime = 0;
-
-
-
+            }
         }
     }
 }
