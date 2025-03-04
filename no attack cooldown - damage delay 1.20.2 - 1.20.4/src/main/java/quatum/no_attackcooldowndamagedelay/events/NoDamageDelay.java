@@ -7,7 +7,6 @@ import quatum.no_attackcooldowndamagedelay.Config;
 import quatum.no_attackcooldowndamagedelay.NoAttackCooldown_DamageDelay;
 
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 @Mod.EventBusSubscriber
 public class NoDamageDelay

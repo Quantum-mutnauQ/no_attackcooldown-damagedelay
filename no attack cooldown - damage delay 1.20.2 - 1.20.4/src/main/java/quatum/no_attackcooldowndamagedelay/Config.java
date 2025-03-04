@@ -1,13 +1,10 @@
 package quatum.no_attackcooldowndamagedelay;
 
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
-
 
 import java.util.ArrayList;
 import java.util.List;
