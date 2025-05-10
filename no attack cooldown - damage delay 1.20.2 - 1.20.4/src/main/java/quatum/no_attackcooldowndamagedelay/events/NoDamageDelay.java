@@ -17,11 +17,10 @@ public class NoDamageDelay
             return;
         }
 
-        String damageTypeKey = Objects.requireNonNull(event.getSource().typeHolder().unwrapKey().get()).toString();
-        String damageType = damageTypeKey.split("/ ")[1].split("]")[0];
+        String damageType = Config.damageType_to_CorospoigString(Objects.requireNonNull(event.getSource().typeHolder().unwrapKey().get()));
 
         if (Config.LogDamageValue) {
-            NoAttackCooldown_DamageDelay.LOGGER.info(damageTypeKey);
+            NoAttackCooldown_DamageDelay.LOGGER.info(damageType);
         }
 
         if (Config.NoDamageDelayValue && !event.getEntity().level().isClientSide()) {

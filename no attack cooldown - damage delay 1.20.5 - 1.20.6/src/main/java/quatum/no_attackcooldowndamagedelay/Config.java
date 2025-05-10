@@ -1,5 +1,7 @@
 package quatum.no_attackcooldowndamagedelay;
 
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -23,14 +25,14 @@ public class Config
     private static final ModConfigSpec.ConfigValue<List<? extends String>> DamageDelay = BUILDER
             .comment("Damage types with delay between hits.")
             .defineListAllowEmpty("DamageDelay", () -> List.of(
-                    DamageTypes.IN_FIRE.toString().split("/ ")[1].split("]")[0],
-                    DamageTypes.CACTUS.toString().split("/ ")[1].split("]")[0],
-                    DamageTypes.HOT_FLOOR.toString().split("/ ")[1].split("]")[0],
-                    DamageTypes.FREEZE.toString().split("/ ")[1].split("]")[0],
-                    DamageTypes.LAVA.toString().split("/ ")[1].split("]")[0],
-                    DamageTypes.FELL_OUT_OF_WORLD.toString().split("/ ")[1].split("]")[0],
-                    DamageTypes.SWEET_BERRY_BUSH.toString().split("/ ")[1].split("]")[0],
-                    DamageTypes.IN_WALL.toString().split("/ ")[1].split("]")[0]
+                    damageType_to_CorospoigString(DamageTypes.IN_FIRE),
+                    damageType_to_CorospoigString(DamageTypes.CACTUS),
+                    damageType_to_CorospoigString(DamageTypes.HOT_FLOOR),
+                    damageType_to_CorospoigString(DamageTypes.FREEZE),
+                    damageType_to_CorospoigString(DamageTypes.LAVA),
+                    damageType_to_CorospoigString(DamageTypes.FELL_OUT_OF_WORLD),
+                    damageType_to_CorospoigString(DamageTypes.SWEET_BERRY_BUSH),
+                    damageType_to_CorospoigString(DamageTypes.IN_WALL)
             ),value -> true);
     private static final ModConfigSpec.BooleanValue NoAttackCooldown = BUILDER
             .comment("Removes the players attack cooldown.").define("NoAttackCooldown", true);
@@ -48,6 +50,10 @@ public class Config
     public static boolean RemoveCooldownIndicatorValue = true;
     public static boolean LogDamageValue=false;
     public static List<String> damageTypesListValue = new ArrayList<>();
+
+    public static String damageType_to_CorospoigString(ResourceKey<DamageType> type){
+        return type.toString().split("/ ")[1].split("]")[0];
+    }
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event)
