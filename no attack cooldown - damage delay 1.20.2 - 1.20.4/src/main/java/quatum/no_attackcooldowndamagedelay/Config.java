@@ -1,8 +1,10 @@
 package quatum.no_attackcooldowndamagedelay;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.Entity;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.config.ModConfigEvent;
@@ -30,6 +32,11 @@ public class Config
                     damageType_to_CorospoigString(DamageTypes.SWEET_BERRY_BUSH),
                     damageType_to_CorospoigString(DamageTypes.IN_WALL)
             ),value -> true);
+    private static final ModConfigSpec.ConfigValue<List<? extends String>> BlacklistedEntitys = BUILDER
+            .comment("The Entity's with a delay between hits")
+            .defineListAllowEmpty("BlacklistedEntitys",() -> List.of(
+                    "minecraft:magma_cube"
+            ),value-> true);
     private static final ModConfigSpec.BooleanValue NoAttackCooldown = BUILDER
             .comment("Removes the players attack cooldown.").define("NoAttackCooldown", true);
     private static final ModConfigSpec.BooleanValue NoDamageDelay = BUILDER
@@ -46,9 +53,13 @@ public class Config
     public static boolean RemoveCooldownIndicatorValue = true;
     public static boolean LogDamageValue=false;
     public static List<String> damageTypesListValue = new ArrayList<>();
+    public static List<String> blacklistedEntitysValue = new ArrayList<>();
 
     public static String damageType_to_CorospoigString(ResourceKey<DamageType> type){
         return type.toString().split("/ ")[1].split("]")[0];
+    }
+    public static String entity_to_CotospoigStrig(Entity entity){
+        return String.valueOf(BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType()));
     }
 
     @SubscribeEvent
@@ -58,6 +69,7 @@ public class Config
         NoDamageDelayValue=NoDamageDelay.get();
         RemoveCooldownIndicatorValue=RemoveCooldownIndicator.get();
         damageTypesListValue= (List<String>) DamageDelay.get();
+        blacklistedEntitysValue=(List<String>) BlacklistedEntitys.get();
         LogDamageValue=LogDamage.get();
 
     }
