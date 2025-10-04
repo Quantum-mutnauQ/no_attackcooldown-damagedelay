@@ -2,7 +2,7 @@ package quatum.no_attackcooldowndamagedelay.events;
 
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;
 import quatum.no_attackcooldowndamagedelay.Config;
 import quatum.no_attackcooldowndamagedelay.NoAttackCooldown_DamageDelay;
 
@@ -12,7 +12,7 @@ import java.util.Objects;
 public class NoDamageDelay
 {
     @SubscribeEvent
-    public static void onLivingDamage(LivingDamageEvent event) {
+    public static void onLivingDamage(LivingAttackEvent event) {
         if (event == null || event.getEntity() == null) {
             return;
         }

@@ -39,7 +39,8 @@ public class Config
     private static final ModConfigSpec.ConfigValue<List<? extends String>> BlacklistedEntitys = BUILDER
             .comment("The Entity's with a delay between hits")
             .defineListAllowEmpty("BlacklistedEntitys",() -> List.of(
-                    "minecraft:magma_cube"
+                    "minecraft:magma_cube",
+                    "minecraft:slime"
             ),value-> true);
     private static final ModConfigSpec.BooleanValue NoAttackCooldown = BUILDER
             .comment("Removes the players attack cooldown.").define("NoAttackCooldown", true);

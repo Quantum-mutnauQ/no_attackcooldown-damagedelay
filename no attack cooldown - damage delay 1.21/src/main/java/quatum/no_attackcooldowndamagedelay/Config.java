@@ -16,8 +16,7 @@ import java.util.List;
 // An example config class. This is not required, but it's a good idea to have one to keep your config organized.
 // Demonstrates how to use Forge's config APIs
 @EventBusSubscriber(modid = NoAttackCooldown_DamageDelay.MODID, bus = EventBusSubscriber.Bus.MOD)
-public class Config
-{
+public class Config{
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
 
@@ -40,7 +39,8 @@ public class Config
     private static final ModConfigSpec.ConfigValue<List<? extends String>> BlacklistedEntitys = BUILDER
             .comment("The Entity's with a delay between hits")
             .defineListAllowEmpty("BlacklistedEntitys",() -> List.of(
-                    "minecraft:magma_cube"
+                    "minecraft:magma_cube",
+                    "minecraft:slime"
             ),value-> true);
     private static final ModConfigSpec.BooleanValue NoAttackCooldown = BUILDER
             .comment("Removes the players attack cooldown.").define("NoAttackCooldown", true);

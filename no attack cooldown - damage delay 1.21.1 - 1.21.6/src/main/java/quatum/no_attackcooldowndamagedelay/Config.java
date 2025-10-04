@@ -6,7 +6,7 @@ import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
@@ -15,11 +15,15 @@ import java.util.List;
 
 // An example config class. This is not required, but it's a good idea to have one to keep your config organized.
 // Demonstrates how to use Forge's config APIs
-@Mod.EventBusSubscriber(modid = NoAttackCooldown_DamageDelay.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = NoAttackCooldown_DamageDelay.MODID)
 public class Config
 {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
+
+
+
     // a list of strings that are treated as resource locations for items
+
     private static final ModConfigSpec.ConfigValue<List<? extends String>> DamageDelay = BUILDER
             .comment("Damage types with delay between hits.")
             .defineListAllowEmpty("DamageDelay", () -> List.of(
@@ -30,8 +34,9 @@ public class Config
                     damageType_to_CorospoigString(DamageTypes.LAVA),
                     damageType_to_CorospoigString(DamageTypes.FELL_OUT_OF_WORLD),
                     damageType_to_CorospoigString(DamageTypes.SWEET_BERRY_BUSH),
-                    damageType_to_CorospoigString(DamageTypes.IN_WALL)
-            ),value -> true);
+                    damageType_to_CorospoigString(DamageTypes.IN_WALL),
+                    damageType_to_CorospoigString(DamageTypes.CAMPFIRE)
+                    ),value -> true);
     private static final ModConfigSpec.ConfigValue<List<? extends String>> BlacklistedEntitys = BUILDER
             .comment("The Entity's with a delay between hits")
             .defineListAllowEmpty("BlacklistedEntitys",() -> List.of(
