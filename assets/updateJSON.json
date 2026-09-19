@@ -42,6 +42,8 @@
         "26.1.2-latest": "9",
         "26.1.2-recommended": "9",
         "26.2-latest": "9",
-        "26.2-recommended": "9"
+        "26.2-recommended": "9",
+        "26.3-latest": "9",
+        "26.3-recommended": "9"
     }
 }
