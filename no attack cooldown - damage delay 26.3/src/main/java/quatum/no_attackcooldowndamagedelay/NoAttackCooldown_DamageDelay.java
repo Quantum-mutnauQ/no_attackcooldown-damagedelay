@@ -18,6 +18,6 @@ public class NoAttackCooldown_DamageDelay {
 
     public NoAttackCooldown_DamageDelay(IEventBus modEventBus, ModContainer modContainer) {
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
-        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        modContainer.registerConfig(ModConfig.Type.LOCAL, Config.SPEC);
     }
 }
