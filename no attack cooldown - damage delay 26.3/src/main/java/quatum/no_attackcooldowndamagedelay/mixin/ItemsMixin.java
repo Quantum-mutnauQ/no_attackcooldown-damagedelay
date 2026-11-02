@@ -1,6 +1,5 @@
 package quatum.no_attackcooldowndamagedelay.mixin;
 
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EquipmentSlotGroup;

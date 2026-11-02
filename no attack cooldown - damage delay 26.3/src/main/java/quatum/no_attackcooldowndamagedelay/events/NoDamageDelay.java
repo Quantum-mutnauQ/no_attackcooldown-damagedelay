@@ -1,10 +1,7 @@
 package quatum.no_attackcooldowndamagedelay.events;
 
-import net.minecraft.client.gui.components.DebugScreenOverlay;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import quatum.no_attackcooldowndamagedelay.Config;
 import quatum.no_attackcooldowndamagedelay.NoAttackCooldown_DamageDelay;
