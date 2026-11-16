@@ -110,6 +110,9 @@ public class Config
                 Type type = new TypeToken<HashMap<String, Float>>() {}.getType();
 
                 CustomDamageValuesValue = GSON.fromJson(reader, type);
+
+                if(CustomDamageValuesValue == null)
+                    CustomDamageValuesValue = new HashMap<>();
             }
 
         } catch (Exception e) {
