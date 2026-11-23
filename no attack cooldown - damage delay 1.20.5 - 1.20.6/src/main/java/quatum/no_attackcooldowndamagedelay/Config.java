@@ -1,5 +1,8 @@
 package quatum.no_attackcooldowndamagedelay;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.damagesource.DamageType;
@@ -10,7 +13,14 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
+import java.io.Reader;
+import java.io.Writer;
+import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 // An example config class. This is not required, but it's a good idea to have one to keep your config organized.
@@ -20,10 +30,11 @@ public class Config
 {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
+    private static final Path CUSTOM_DAMAGE_FILE = Paths.get("config", "custom_damage_values.json");
 
     // a list of strings that are treated as resource locations for items
-
     private static final ModConfigSpec.ConfigValue<List<? extends String>> DamageDelay = BUILDER
             .comment("Damage types with delay between hits.")
             .defineListAllowEmpty("DamageDelay", () -> List.of(
@@ -59,6 +70,7 @@ public class Config
     public static boolean LogDamageValue=false;
     public static List<String> damageTypesListValue = new ArrayList<>();
     public static List<String> blacklistedEntitysValue = new ArrayList<>();
+    public static HashMap<String,Float> CustomDamageValuesValue= null;
 
     public static String damageType_to_CorospoigString(ResourceKey<DamageType> type){
         return type.toString().split("/ ")[1].split("]")[0];
@@ -76,5 +88,33 @@ public class Config
         blacklistedEntitysValue=(List<String>) BlacklistedEntitys.get();
         LogDamageValue=LogDamage.get();
 
+    }
+
+    public static void loadDamageValues(){
+        if(CustomDamageValuesValue != null)
+            return;
+
+        try {
+            Files.createDirectories(CUSTOM_DAMAGE_FILE.getParent());
+
+            if (!Files.exists(CUSTOM_DAMAGE_FILE)) {
+                try (Writer writer = Files.newBufferedWriter(CUSTOM_DAMAGE_FILE)) {
+                    GSON.toJson(CustomDamageValuesValue, writer);
+                }
+                return;
+            }
+
+            try (Reader reader = Files.newBufferedReader(CUSTOM_DAMAGE_FILE)) {
+                Type type = new TypeToken<HashMap<String, Float>>() {}.getType();
+
+                CustomDamageValuesValue = GSON.fromJson(reader, type);
+
+                if(CustomDamageValuesValue == null)
+                    CustomDamageValuesValue = new HashMap<>();
+            }
+
+        } catch (Exception e) {
+            NoAttackCooldown_DamageDelay.LOGGER.error("Failed to load custom_damage_values.json", e);
+        }
     }
 }
