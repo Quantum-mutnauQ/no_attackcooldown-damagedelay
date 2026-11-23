@@ -7,8 +7,7 @@
 !/*/src/
 !/*/src/**
 !/*/gradle/
-!/*/gradle/**
-/*/gradle/gradle-wrapper.jar
+!/*/gradle/gradle-wrapper.properties
 !/*/build.gradle
 !/*/gradle.properties
 !/*/gradlew
@@ -21,7 +20,7 @@
 !/Forge - End of Life/*/src/
 !/Forge - End of Life/*/src/**
 !/Forge - End of Life/*/gradle/
-!/Forge - End of Life/*/gradle/**
+!/Forge - End of Life/*/gradle/gradle-wrapper.properties
 !/Forge - End of Life/*/build.gradle
 !/Forge - End of Life/*/gradle.properties
 !/Forge - End of Life/*/gradlew
